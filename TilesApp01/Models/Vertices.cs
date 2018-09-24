@@ -8,8 +8,8 @@ namespace TilesApp01.Models
 {
     public class Vertices
     {
-        public Point v1 { get; set; }
-        public Point v2 { get; set; }
-        public Point v3 { get; set; }
+        public Point V1 { get; set; }
+        public Point V2 { get; set; }
+        public Point V3 { get; set; }
     }
 }
