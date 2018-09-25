@@ -53,6 +53,7 @@ namespace TilesApp01.Models
                     };
                     char rowReturn = ComputeRow(vs);
                     char[] rowReturnArray = new char[1];
+                    rowReturnArray[0] = rowReturn;
                     int col = ComputeCol(vs);
                     triangle = new Triangle
                     {
@@ -142,12 +143,12 @@ namespace TilesApp01.Models
                 if (centerX < squareCenterX)
                 {
                     //odd column
-                    col = colSquare;
+                    col = colSquare + 1;
                 }
                 else
                 {
                     //even column
-                    col = colSquare + 1;
+                    col = colSquare + 2;
                 }
             }
             return col;
