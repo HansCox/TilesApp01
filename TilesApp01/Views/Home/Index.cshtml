@@ -1,24 +1,89 @@
-﻿<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS, and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+﻿<div id="body">
+    <form id="getTriangleForm" method="post">
+        <h3>Get Triangle</h3>
+        <p>
+            <label for="Row">Row ID:</label>
+            <input type="text" name="Row" id="Row" />
+        </p>
+        <p>
+            <label for="Column">Column Number:</label>
+            <input type="number" name="Column" id="Column"/>
+        </p>
+        <p>
+            <label for="V1X">V1.X:</label>
+            <input type="number" name="V1X" id="V1X"/>
+            <label for="V1Y">V1.Y:</label>
+            <input type="number" name="V1Y" id="V1Y"/>
+        </p>
+        <p>
+            <label for="V2X">V2.X:</label>
+            <input type="number" name="V2X" id="V2X"/>
+            <label for="V2Y">V2.Y:</label>
+            <input type="number" name="V2Y" id="V2Y"/>
+        </p>
+        <p>
+            <label for="V3X">V3.X:</label>
+            <input type="number" name="V3X" id="V3X"/>
+            <label for="V3Y">V3.Y:</label>
+            <input type="number" name="V3Y" id="V3Y"/>
+        </p>
+        <input type="button" id="getBtn" value="Get" />
+    </form>
+    <div id="result">
+    </div>
 </div>
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>ASP.NET Web API is a framework that makes it easy to build HTTP services that reach
-        a broad range of clients, including browsers and mobile devices. ASP.NET Web API
-        is an ideal platform for building RESTful applications on the .NET Framework.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301870">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301871">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301872">Learn more &raquo;</a></p>
-    </div>
-</div>
+
+
+@section scripts{
+    <script type="text/javascript">
+$(function()
+{
+    $.getJSON('/api/tiles', function(tilesJsonPayload)
+    {
+        $('#results').append(JSON.stringify(tilesJsonPayload));        
+    });
+
+    $('#getBtn').click(function () {
+        var t = JSON.stringify(
+        {     
+            'Row': $('#Row').val(),
+            'Column': $('#Column').val(),
+            'Corners':
+            {
+                'V1': { 'X': $('#V1X').val(), 'Y': $('#V1Y').val() },
+                'V2': { 'X': $('#V2X').val(), 'Y': $('#V2Y').val() },
+                'V3': { 'X': $('#V3X').val(), 'Y': $('#V3Y').val() }
+            }
+            });
+        console.log('request object: ', t);
+        $('#result').append(t);
+
+        /*$.post("/api/tiles",                            
+            t,
+            function (value) {
+                $('#result').append(value);
+            },
+            "json"
+        );
+        */
+        $.ajax({
+            url: '/api/tiles',
+            type: 'POST',
+            contentType: 'application/json',
+            success:
+                function (value) {
+                    console.log(JSON.stringify(value));
+                    $('#result').append(JSON.stringify(value));
+                }
+            ,
+            error: function (request, message, error) {
+                console.log(message);
+              
+            },
+            data: t
+        });
+      
+    });
+}); 
+    </script>
+}

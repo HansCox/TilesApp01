@@ -188,6 +188,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Triangle.cs" />
+    <Compile Include="Models\Vertex.cs" />
     <Compile Include="Models\Vertices.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
