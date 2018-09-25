@@ -38,12 +38,9 @@
     <script type="text/javascript">
 $(function()
 {
-    $.getJSON('/api/tiles', function(tilesJsonPayload)
-    {
-        $('#results').append(JSON.stringify(tilesJsonPayload));        
-    });
-
+    //Get a triangle
     $('#getBtn').click(function () {
+        //Construct request object from form values
         var t = JSON.stringify(
         {     
             'Row': $('#Row').val(),
@@ -56,16 +53,7 @@ $(function()
             }
             });
         console.log('request object: ', t);
-        $('#result').append(t);
-
-        /*$.post("/api/tiles",                            
-            t,
-            function (value) {
-                $('#result').append(value);
-            },
-            "json"
-        );
-        */
+        //Make http call to web api, which knows what values to compute based upon input
         $.ajax({
             url: '/api/tiles',
             type: 'POST',
@@ -73,7 +61,7 @@ $(function()
             success:
                 function (value) {
                     console.log(JSON.stringify(value));
-                    $('#result').append(JSON.stringify(value));
+                    $('#result').append(JSON.stringify(value) + '<br>');
                 }
             ,
             error: function (request, message, error) {
@@ -81,8 +69,7 @@ $(function()
               
             },
             data: t
-        });
-      
+        });     
     });
 }); 
     </script>

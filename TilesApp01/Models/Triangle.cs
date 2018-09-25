@@ -92,19 +92,19 @@ namespace TilesApp01.Models
                 )
             {
                 int sideLen = Triangle.SIDE_LENGTH;
-                int rownum = row - Triangle.ROW_START;
+                int rownum = row - Triangle.ROW_START + 1;
 
                 //When constructing a triangle, v1 is upper-left vertex
                 if (col % 2 == 1) //Odd columns are lower-left of square
                 {
-                    vs.V1 = new Vertex(rownum * sideLen, (col - 1) * sideLen);
+                    vs.V1 = new Vertex((col - 1) / 2 * sideLen, (rownum - 1) * sideLen);
                     vs.V2 = new Vertex(vs.V1.X, vs.V1.Y + sideLen);
                     vs.V3 = new Vertex(vs.V1.X + sideLen, vs.V1.Y + sideLen);
 
                 }
                 else //Even columns are upper right of square
                 {
-                    vs.V1 = new Vertex(rownum * sideLen, (col - 2) * sideLen);
+                    vs.V1 = new Vertex((col - 1) / 2 * sideLen, (rownum - 1) * sideLen);
                     vs.V2 = new Vertex(vs.V1.X + sideLen, vs.V1.Y);
                     vs.V3 = new Vertex(vs.V1.X + sideLen, vs.V1.Y + sideLen);
                 }
