@@ -138,17 +138,17 @@ namespace TilesApp01.Models
                 //If it is in the left half of a grid square, it is an odd column.
                 int centerX = vs.V1.X + vs.V2.X + vs.V3.X;
                 centerX = centerX / 3; //Truncation may occur.
-                int colSquare = centerX / Triangle.SIDE_LENGTH;
-                int squareCenterX = (colSquare * Triangle.SIDE_LENGTH) + (Triangle.SIDE_LENGTH / 2);
+                int colSquare = centerX / Triangle.SIDE_LENGTH + 1;
+                int squareCenterX = ((colSquare - 1) * Triangle.SIDE_LENGTH) + (Triangle.SIDE_LENGTH / 2);
                 if (centerX < squareCenterX)
                 {
                     //odd column
-                    col = colSquare + 1;
+                    col = colSquare * 2 - 1;
                 }
                 else
                 {
                     //even column
-                    col = colSquare + 2;
+                    col = colSquare * 2;
                 }
             }
             return col;
