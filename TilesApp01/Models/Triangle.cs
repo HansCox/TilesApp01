@@ -161,7 +161,7 @@ namespace TilesApp01.Models
             centerY = centerY / 3; //Truncation may occur.
             int centerX = vs.V1.X + vs.V2.X + vs.V3.X;
             centerX = centerX / 3; //Truncation may occur.
-            if (centerY > 0 && centerY < (Triangle.ROW_END - Triangle.ROW_START) * Triangle.SIDE_LENGTH
+            if (centerY > 0 && centerY < (Triangle.ROW_END - Triangle.ROW_START + 1) * Triangle.SIDE_LENGTH
                 && centerX > 0 && centerX < ((Triangle.COL_END / 2) * Triangle.SIDE_LENGTH)
                 )
             {
